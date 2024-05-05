@@ -14,6 +14,7 @@ read -s db_pswd
 if [ $USERID -ne 0 ]
 then    
     echo -e "$R Please run with root user $N"
+    exit 1
 else
     echo -e "$G You are a super user $N"
 fi
@@ -25,6 +26,7 @@ VALIDATE(){
         echo -e "$G $2 ... SUCCESS $N"
     else
         echo -e "$R $2 ... FAILED $N"
+        exit 1
     fi
 
 }
