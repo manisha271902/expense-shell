@@ -47,7 +47,7 @@ then
 else
     useradd expense
     VALIDATE $? "Adding USer" 
-
+fi
 # mkdir /app
 # VALIDATE $? "Creating APp direcorty" &>>$LOG_FILE
 
