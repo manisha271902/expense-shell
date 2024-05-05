@@ -44,6 +44,7 @@ id expense &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     echo -e "$R User already exists!!! $N"
+    exit 1
 else
     useradd expense
     VALIDATE $? "Adding USer" 
