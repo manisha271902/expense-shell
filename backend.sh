@@ -29,17 +29,17 @@ VALIDATE(){
 
 }
 
-dnf module disable nodejs -y
-VALIDATE $? "Diasbling default nodejs" &>>$LOG_FILE
+dnf module disable nodejs -y &>>$LOG_FILE
+VALIDATE $? "Diasbling default nodejs" 
 
-dnf module enable nodejs:20 -y
-VALIDATE $? "enabling  nodejs 20 version" &>>$LOG_FILE
+dnf module enable nodejs:20 -y &>>$LOG_FILE
+VALIDATE $? "enabling  nodejs 20 version" 
 
-dnf install nodejs -y
-VALIDATE $? "Installing Nodejs" &>>$LOG_FILE
+dnf install nodejs -y &>>$LOG_FILE
+VALIDATE $? "Installing Nodejs" 
 
-useradd expense
-VALIDATE $? "Adding USer" &>>$LOG_FILE
+useradd expense &>>$LOG_FILE
+VALIDATE $? "Adding USer" 
 
 # mkdir /app
 # VALIDATE $? "Creating APp direcorty" &>>$LOG_FILE

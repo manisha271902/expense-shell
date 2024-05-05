@@ -28,14 +28,14 @@ VALIDATE(){
 
 }
 
-dnf install mysql-server -y
-VALIDATE $? "Installing MYSQL" &>>$LOG_FILE
+dnf install mysql-server -y  &>>$LOG_FILE
+VALIDATE $? "Installing MYSQL"
 
-systemctl enable mysqld 
-VALIDATE $? "Enabling mysql" &>>$LOG_FILE
+systemctl enable mysqld  &>>$LOG_FILE
+VALIDATE $? "Enabling mysql" 
 
-systemctl start mysqld 
-VALIDATE $? "starting mysql" &>>$LOG_FILE
+systemctl start mysqld  &>>$LOG_FILE
+VALIDATE $? "starting mysql" 
 
 
 # mysql_secure_installation --set-root-pass cherry123
