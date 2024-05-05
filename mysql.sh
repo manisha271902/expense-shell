@@ -6,6 +6,9 @@ R="\e[31m"
 G="\e[32m"
 N="\e[0m"
 Y="\e[33m"
+echo "ENter password"
+read -s db_pswd
+
 
 if [ $USERID -ne 0 ]
 then    
@@ -35,5 +38,19 @@ systemctl start mysqld
 VALIDATE $? "starting mysql" &>>$LOG_FILE
 
 
-mysql_secure_installation --set-root-pass cherry123
-VALIDATE $? "Setting up root usr password" &>>$LOG_FILE
+# mysql_secure_installation --set-root-pass cherry123
+# VALIDATE $? "Setting up root usr password" &>>$LOG_FILE
+
+
+#Belowe code is used for idempotency  nature
+mysql_secure_installation -uroot -p$(db_pswd) -e "show databases;" &>>$LOG_FILE
+if [ $? -ne 0 ]
+then
+    mysql_secure_installation --set-root-pass db_pswd 
+else
+    echo -e "mysql root password is already setup, so $Y skipping $N"
+fi
+
+    
+
+#ikada password dynamic ga istunam ->  mysql_secure_installation -uroot cherry123 -e "show databases;" &>>$LOG_FILE
