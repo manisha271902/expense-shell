@@ -43,7 +43,7 @@ VALIDATE $? "starting mysql" &>>$LOG_FILE
 
 
 #Belowe code is used for idempotency  nature
-mysql_secure_installation -uroot -p$(db_pswd) -e "show databases;" &>>$LOG_FILE
+mysql_secure_installation -uroot -p${db_pswd} -e "show databases;" &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass db_pswd 
