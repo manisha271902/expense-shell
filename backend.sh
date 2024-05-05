@@ -43,11 +43,11 @@ VALIDATE $? "Installing Nodejs"
 id expense &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
-    echo -e "$R User already exists!!! $N"
-    exit 1
-else
     useradd expense
-    VALIDATE $? "Adding USer" 
+    VALIDATE $? "Creating USer"    
+else
+    echo -e "$R User already exists!!! $N"
+    exit 1   
 fi
 # mkdir /app
 # VALIDATE $? "Creating APp direcorty" &>>$LOG_FILE
