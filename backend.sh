@@ -57,28 +57,28 @@ VALIDATE $? "Downloading code"
 
 cd /app
 rm -rf /app/*
-unzip /tmp/backend.zip &>>$LOGFILE
+unzip /tmp/backend.zip &>>$LOG_FILE
 VALIDATE $? "Extracted backend code"
 
-npm install &>>$LOGFILE
+npm install &>>$LOG_FILE
 VALIDATE $? "Installing nodejs Dependencies"
 
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
 VALIDATE $? "Copied backend service"
 
-systemctl daemon-reload &>>$LOGFILE
+systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "Daemon Reload"
 
-systemctl start backend &>>$LOGFILE
+systemctl start backend &>>$LOG_FILE
 VALIDATE $? "Starting backend"
 
-systemctl enable backend &>>$LOGFILE
+systemctl enable backend &>>$LOG_FILE
 VALIDATE $? "Enabling backend"
 
 
 #schema ni load cheyali, so
 
-dnf install mysql -y &>>$LOGFILE
+dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Installing MySQL Client"
 
 
