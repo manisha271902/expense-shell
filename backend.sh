@@ -8,7 +8,7 @@ G="\e[32m"
 N="\e[0m"
 Y="\e[33m"
 echo "ENter password"
-read -s db_pswd
+read -s mysql_root_password
 
 
 if [ $USERID -ne 0 ]
@@ -59,6 +59,32 @@ rm -rf /app/*
 unzip /tmp/backend.zip
 VALIDATE $? "Extracted backend code"
 
+npm install &>>$LOGFILE
+VALIDATE $? "Installing nodejs Dependencies"
 
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+VALIDATE $? "Copied backend service"
+
+systemctl daemon-reload &>>$LOGFILE
+VALIDATE $? "Daemon Reload"
+
+systemctl start backend &>>$LOGFILE
+VALIDATE $? "Starting backend"
+
+systemctl enable backend &>>$LOGFILE
+VALIDATE $? "Enabling backend"
+
+
+#schema ni load cheyali, so
+
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "Installing MySQL Client"
+
+
+ mysql -h db.manisha.fun -uroot  -p${mysql_root_password} < /app/schema/backend.sql
+ VALIDATE $? "Schema laoding"
+
+ systemctl restart backend
+ VALIDATE $? "Restarting Backend"
 
 
