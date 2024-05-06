@@ -48,21 +48,22 @@ then
 else
     echo -e "$R User already exists!!! $N" 
 fi
-mkdir -p /app
-VALIDATE $? "Creating APp direcorty" &>>$LOG_FILE
+mkdir -p /app &>>$LOG_FILE
+VALIDATE $? "Creating APp direcorty" 
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-VALIDATE $? "Downloading code" &>>$LOG_FILE
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
+
+VALIDATE $? "Downloading code" 
 
 cd /app
 rm -rf /app/*
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extracted backend code"
 
 npm install &>>$LOGFILE
 VALIDATE $? "Installing nodejs Dependencies"
 
-cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
 VALIDATE $? "Copied backend service"
 
 systemctl daemon-reload &>>$LOGFILE
@@ -81,10 +82,10 @@ dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL Client"
 
 
- mysql -h db.manisha.fun -uroot  -p${mysql_root_password} < /app/schema/backend.sql
+ mysql -h db.manisha.fun -uroot  -p${mysql_root_password} < /app/schema/backend.sql &>>$LOG_FILE
  VALIDATE $? "Schema laoding"
 
- systemctl restart backend
+ systemctl restart backend &>>$LOG_FILE
  VALIDATE $? "Restarting Backend"
 
 
