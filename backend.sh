@@ -46,16 +46,19 @@ then
     useradd expense
     VALIDATE $? "Creating USer"    
 else
-    echo -e "$R User already exists!!! $N"
-    exit 1   
+    echo -e "$R User already exists!!! $N" 
 fi
-# mkdir /app
-# VALIDATE $? "Creating APp direcorty" &>>$LOG_FILE
+mkdir -p /app
+VALIDATE $? "Creating APp direcorty" &>>$LOG_FILE
 
-# curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-# VALIDATE $? "Downloading code" &>>$LOG_FILE
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+VALIDATE $? "Downloading code" &>>$LOG_FILE
 
-# cd /app
-# VALIDATE $? "Downloading code" &>>$LOG_FILE
+cd /app
+rm -rf /app/*
+unzip /tmp/backend.zip
+VALIDATE $? "Extracted backend code"
 
-# unzip /tmp/backend.zip
+
+
+
