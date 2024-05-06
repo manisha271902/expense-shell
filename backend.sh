@@ -82,7 +82,7 @@ dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Installing MySQL Client"
 
 
- mysql -h db.manisha.fun -uroot  -p${mysql_root_password} < /app/schema/backend.sql &>>$LOG_FILE
+ mysql -h db.manisha.fun -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOG_FILE
  VALIDATE $? "Schema laoding"
 
  systemctl restart backend &>>$LOG_FILE
