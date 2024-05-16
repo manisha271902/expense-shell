@@ -7,8 +7,9 @@ R="\e[31m"
 G="\e[32m"
 N="\e[0m"
 Y="\e[33m"
-echo "ENter password"
-read -s mysql_root_password
+echo "Enter DB password"
+read -s mysql_root_pasword
+
 
 
 if [ $USERID -ne 0 ]
@@ -31,6 +32,9 @@ VALIDATE(){
 
 }
 
+
+#till abobe same
+
 dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? "Diasbling default nodejs" 
 
@@ -39,6 +43,10 @@ VALIDATE $? "enabling  nodejs 20 version"
 
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing Nodejs" 
+
+useradd expense
+VALIDATE $? "user added" 
+
 
 id expense &>>$LOG_FILE
 if [ $? -ne 0 ]
