@@ -6,8 +6,8 @@ R="\e[31m"
 G="\e[32m"
 N="\e[0m"
 Y="\e[33m"
-echo "ENter password"
-read -s db_pswd
+echo "ENter DB password"
+read -s db_pswd   #kindha configure chesina root pasword eh ikada use cheyali
 
 
 if [ $USERID -ne 0 ]
@@ -21,9 +21,9 @@ fi
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo -e "$G $2 ... SUCCESS $N"
+        echo -e " $2 ... $G SUCCESS $N"
     else
-        echo -e "$R $2 ... FAILED $N"
+        echo -e " $2 ... $R FAILED $N"
     fi
 
 }
