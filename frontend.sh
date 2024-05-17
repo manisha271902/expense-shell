@@ -21,6 +21,7 @@ VALIDATE(){
         echo "$2 ....$R FAILED $N"
     else
         echo "$2..... $G SUCCESS $N"
+    fi
 }
 
 
